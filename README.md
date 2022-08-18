@@ -14,3 +14,7 @@ Integrantes:
 3. Vicky Ospina
 4. Nicolas Aponte
 5. Santiago Janace
+
+# Mensaje
+
+Este software será construido por un equipo íntegro y lleno de ideas! :D
