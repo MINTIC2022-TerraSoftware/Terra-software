@@ -9,8 +9,8 @@ situación financiera
 
 Integrantes:
 
-Julián Gaviria Quintero
-William Alvarez
-Vicky Ospina
-Nicolas Aponte
-Santiago Janacet
+1. Julián Gaviria Quintero
+2. William Alvarez
+3. Vicky Ospina
+4. Nicolas Aponte
+5. Santiago Janace
