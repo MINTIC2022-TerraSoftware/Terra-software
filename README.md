@@ -13,8 +13,12 @@ Integrantes:
 2. William Alvarez
 3. Vicky Ospina
 4. Nicolas Aponte
-5. Santiago Janace
+5. Santiago Janacet
 
 # Mensaje
 
 Este software será construido por un equipo íntegro y lleno de ideas! :D
+
+# Mensaje1
+
+Saludos a todos los integrantes del equipo. 
