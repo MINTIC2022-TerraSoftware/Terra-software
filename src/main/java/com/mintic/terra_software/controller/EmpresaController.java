@@ -17,12 +17,12 @@ public class EmpresaController {
     @Autowired
     private ImpEmpresaService impEmpresaService;
 
-    @GetMapping("/")
+    @GetMapping("/obtener")
     public ResponseEntity<List<Empresa>>  buscarTodas (){
         return new ResponseEntity<>(impEmpresaService.buscarTodas(), HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping("/crear")
     public ResponseEntity<Empresa>  guardarEmpresa (@RequestBody Empresa empresa){
         impEmpresaService.guardar(empresa);
         return new ResponseEntity<>(HttpStatus.CREATED);
