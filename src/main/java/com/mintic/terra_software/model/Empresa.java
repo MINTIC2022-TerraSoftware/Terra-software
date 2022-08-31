@@ -1,13 +1,23 @@
 package com.mintic.terra_software.model;
 
+import lombok.Data;
 
+import javax.persistence.*;
+
+@Entity
+@Data
+@Table(name="empresa")
 public class Empresa {
 
-
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nombre;
     private String direccion;
     private String telefono;
     private String nit;
+
 
     public Empresa(String nombre, String direccion, String telefono, String nit) {
         this.nombre = nombre;
@@ -16,35 +26,8 @@ public class Empresa {
         this.nit = nit;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Empresa() {
+
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getNit() {
-        return nit;
-    }
-
-    public void setNit(String nit) {
-        this.nit = nit;
-    }
 }
