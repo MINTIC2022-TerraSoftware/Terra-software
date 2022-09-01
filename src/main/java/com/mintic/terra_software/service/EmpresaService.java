@@ -2,7 +2,6 @@ package com.mintic.terra_software.service;
 
 import com.mintic.terra_software.model.Empresa;
 import com.mintic.terra_software.repository.EmpresaRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,7 +50,6 @@ public class EmpresaService implements ImpEmpresaService {
         }
         return empresaEntity;
     }
-
 
     @Override
     public Empresa empresaXId(Long idEmpresa) {
