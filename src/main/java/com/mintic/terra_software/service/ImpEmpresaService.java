@@ -8,9 +8,11 @@ public interface ImpEmpresaService {
 
     List<Empresa> buscarTodas();
 
-    void guardar(Empresa empresa);
+    Empresa guardar(Empresa empresa);
 
-    void eliminar(int idEmpresa);
+    Empresa modificar(Long idEmpresa, Empresa empresa);
 
-    Empresa empresaXId(int idEmpresa);
+    void eliminar(Long idEmpresa);
+
+    Empresa empresaXId(Long idEmpresa);
 }

@@ -23,9 +23,18 @@ public class EmpresaController {
     }
 
     @PostMapping("/crear")
-    public ResponseEntity<Empresa>  guardarEmpresa (@RequestBody Empresa empresa){
+    public ResponseEntity<List<Empresa>> guardarEmpresa (@RequestBody Empresa empresa){
         impEmpresaService.guardar(empresa);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @GetMapping("/obtener/{id}")
+    public ResponseEntity<Empresa>  buscarXid (@PathVariable("id") Long id){
+        return new ResponseEntity<>(impEmpresaService.empresaXId(id), HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Empresa>  modificar (@PathVariable("id") Long id, @RequestBody Empresa empresa){
+        return new ResponseEntity<>(impEmpresaService.modificar(id, empresa), HttpStatus.OK);
+    }
 }
