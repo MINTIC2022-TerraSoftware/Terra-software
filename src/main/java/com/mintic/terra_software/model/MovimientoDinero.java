@@ -1,22 +1,30 @@
 package com.mintic.terra_software.model;
 
+import lombok.Data;
+
+import javax.persistence.*;
+
+@Entity
+@Data
+@Table(name = "Movimientos")
 public class MovimientoDinero {
-    private float Monto;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private double monto;
     private String concepto;
-    private String Usuario;
 
-    public MovimientoDinero(float monto, String concepto, String usuario) {
-        Monto = monto;
-        this.concepto = concepto;
-        Usuario = usuario;
+
+    public MovimientoDinero() {
     }
 
-    public float getMonto() {
-        return Monto;
+    public double getMonto() {
+        return monto;
     }
 
-    public void setMonto(float monto) {
-        Monto = monto;
+    public void setMonto(double monto) {
+        this.monto = monto;
     }
 
     public String getConcepto() {
@@ -27,11 +35,5 @@ public class MovimientoDinero {
         this.concepto = concepto;
     }
 
-    public String getUsuario() {
-        return Usuario;
-    }
 
-    public void setUsuario(String usuario) {
-        Usuario = usuario;
-    }
 }
