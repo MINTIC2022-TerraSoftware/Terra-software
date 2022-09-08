@@ -1,12 +1,30 @@
 package com.mintic.terra_software.model;
 
-public class Empleado {
+import javax.persistence.*;
 
+@Entity
+@Table(name = "empleado")
+public class Empleado {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
     private String nombreEmpleado;
     private String correoEmpleado;
     private String nombreEmpresaEmpleado;
     private String rolEmpleado;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Empleado() {
+    }
 
     public String getNombreEmpleado() {
         return nombreEmpleado;

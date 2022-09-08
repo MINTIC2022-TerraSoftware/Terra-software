@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmpresaService implements ImpEmpresaService {
+public class    EmpresaService implements ImpEmpresaService {
 
     @Autowired
     private EmpresaRepository empresaRepository;
