@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title> APP.</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/bootstrap/css/styles.css}" rel="stylesheet">
 </head>
+
+<header th:insert="fragments/menu :: menu-principal"></header>
+
 <body>
-    <h1 th:text="${mensaje}"></h1>
+<div class="d-flex justify-content-center">
+    algo
+</div>
+<!-- /#wrapper -->
+
 </body>
+
+<footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/bootstrap/js/scripts.js}"></script>
 </html>
