@@ -9,11 +9,17 @@ public class Empleado {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
     private String nombreEmpleado;
     private String correoEmpleado;
     private String nombreEmpresaEmpleado;
+
+    @ManyToOne
+    @JoinColumn(name="rolempleado")
     private String rolEmpleado;
+
+    @ManyToOne
+    @JoinColumn(name="id_empresa")
+    private Empresa idEmpresa;
 
     public Long getId() {
         return id;
@@ -58,11 +64,27 @@ public class Empleado {
         this.rolEmpleado = rolEmpleado;
     }
 
-    public Empleado(String nombreEmpleado, String correoEmpleado, String nombreEmpresaEmpleado, String rolEmpleado) {
+    
+    /**
+     * @return Empresa return the idEmpresa
+     */
+    public Empresa getIdEmpresa() {
+        return idEmpresa;
+    }
+
+    /**
+     * @param idEmpresa the idEmpresa to set
+     */
+    public void setIdEmpresa(Empresa idEmpresa) {
+        this.idEmpresa = idEmpresa;
+    }
+    
+    public Empleado(String nombreEmpleado, String correoEmpleado, String nombreEmpresaEmpleado, String rolEmpleado, Empresa idEmpresa) {
         this.nombreEmpleado = nombreEmpleado;
         this.correoEmpleado = correoEmpleado;
         this.nombreEmpresaEmpleado = nombreEmpresaEmpleado;
         this.rolEmpleado = rolEmpleado;
+        this.idEmpresa= idEmpresa;
     }
 
 
