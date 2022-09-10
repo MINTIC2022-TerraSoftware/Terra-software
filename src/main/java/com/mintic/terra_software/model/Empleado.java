@@ -13,8 +13,8 @@ public class Empleado {
     private String correoEmpleado;
     private String nombreEmpresaEmpleado;
 
-    @ManyToOne
-    @JoinColumn(name="rolempleado")
+    /*@ManyToOne
+    @JoinColumn(name="rolempleado")*/
     private String rolEmpleado;
 
     @ManyToOne
