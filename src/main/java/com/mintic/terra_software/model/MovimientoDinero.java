@@ -15,13 +15,13 @@ public class MovimientoDinero {
     private double monto;
     private String concepto;
 
-    @ManyToOne
-    @JoinColumn(name="id_empresa")
-    private Empresa idEmpresa;
+    /*@ManyToOne
+    @JoinColumn(name="id_empresa")*/
+    //private Empresa idEmpresa;
 
-    @ManyToOne
-    @JoinColumn(name="id_empleado")
-    private Empleado idEmpleado;
+    /*@ManyToOne
+    @JoinColumn(name="id_empleado")*/
+    //private Empleado idEmpleado;
 
 
     public MovimientoDinero() {
@@ -41,34 +41,6 @@ public class MovimientoDinero {
 
     public void setConcepto(String concepto) {
         this.concepto = concepto;
-    }
-
-    /**
-     * @return Empresa return the idEmpresa
-     */
-    public Empresa getIdEmpresa() {
-        return idEmpresa;
-    }
-
-    /**
-     * @param idEmpresa the idEmpresa to set
-     */
-    public void setIdEmpresa(Empresa idEmpresa) {
-        this.idEmpresa = idEmpresa;
-    }
-
-    /**
-     * @return Empleado return the idEmpleado
-     */
-    public Empleado getIdEmpleado() {
-        return idEmpleado;
-    }
-
-    /**
-     * @param idEmpleado the idEmpleado to set
-     */
-    public void setIdEmpleado(Empleado idEmpleado) {
-        this.idEmpleado = idEmpleado;
     }
 
 }
