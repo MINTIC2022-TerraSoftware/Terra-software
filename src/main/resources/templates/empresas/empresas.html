@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title> APP.</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/bootstrap/css/styles.css}" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet" >
+</head>
+
+<header th:insert="fragments/menu :: menu-principal"></header>
+
+<body>
+<table class="table table-sm" >
+    <thead class="thead-light">
+    <tr>
+        <th scope="col">Nombre</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="empresa : ${empresas.content}">
+        <td th:text="${empresa.nombre}">Finanzas</td>
+        <td>
+            <a href="#" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
+            <a href="#"  target="_blank" class="btn btn-success btn-sm" role="button" title="Descargar Curriculm Vitae."><i class="fas fa-download" aria-hidden="true"></i></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<!-- /#wrapper -->
+
+</body>
+
+<footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/bootstrap/js/scripts.js}"></script>
+</html>
