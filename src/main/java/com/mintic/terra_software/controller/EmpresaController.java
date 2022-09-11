@@ -17,18 +17,18 @@ public class EmpresaController {
     @Autowired
     private ImpEmpresaService impEmpresaService;
 
-    @GetMapping("/obtener")
+    @GetMapping("")
     public ResponseEntity<List<Empresa>>  buscarTodas (){
         return new ResponseEntity<>(impEmpresaService.buscarTodas(), HttpStatus.OK);
     }
 
-    @PostMapping("/crear")
+    @PostMapping("")
     public ResponseEntity<List<Empresa>> guardarEmpresa (@RequestBody Empresa empresa){
         impEmpresaService.guardar(empresa);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/obtener/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Empresa>  buscarXid (@PathVariable("id") Long id){
         return new ResponseEntity<>(impEmpresaService.empresaXId(id), HttpStatus.OK);
     }
@@ -36,5 +36,10 @@ public class EmpresaController {
     @PatchMapping("/{id}")
     public ResponseEntity<Empresa>  modificar (@PathVariable("id") Long id, @RequestBody Empresa empresa){
         return new ResponseEntity<>(impEmpresaService.modificar(id, empresa), HttpStatus.OK);
+    }
+    @DeleteMapping("/{id}")
+    public String borrarEmpresa (@PathVariable Long id){
+        impEmpresaService.eliminar(id);
+        return "Empresa con id: "+id+" ha sido eliminada!";
     }
 }

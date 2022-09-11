@@ -39,8 +39,7 @@ public class EmpleadoService implements ImpEmpleadoService {
             }
             empleadoEntity.setNombreEmpleado(empleado.getNombreEmpleado());
             empleadoEntity.setCorreoEmpleado(empleado.getCorreoEmpleado());
-            empleadoEntity.setNombreEmpresaEmpleado(empleado.getNombreEmpresaEmpleado());
-            empleadoEntity.setRolEmpleado(empleado.getRolEmpleado());
+            empleadoEntity.setRolEmpleado((empleado.getRolEmpleado()));
             empleadoRepository.save(empleadoEntity);
         }
 
