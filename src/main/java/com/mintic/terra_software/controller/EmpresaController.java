@@ -39,8 +39,14 @@ public class EmpresaController {
         return new ResponseEntity<>(impEmpresaService.empresaXId(id), HttpStatus.OK);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/modificar/{id}")
     public ResponseEntity<Empresa>  modificar (@PathVariable("id") Long id, @RequestBody Empresa empresa){
         return new ResponseEntity<>(impEmpresaService.modificar(id, empresa), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    public String borrarEmpresa (@PathVariable Long id){
+        impEmpresaService.eliminar(id);
+        return "Empresa con id: "+id+" ha sido eliminada!";
     }
 }

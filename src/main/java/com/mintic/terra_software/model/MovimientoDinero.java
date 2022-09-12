@@ -16,27 +16,16 @@ public class MovimientoDinero {
     private double monto;
     private String concepto;
 
-<<<<<<< HEAD
-    /*@ManyToOne
-    @JoinColumn(name="id_empresa")*/
-    //private Empresa idEmpresa;
-
-    /*@ManyToOne
-    @JoinColumn(name="id_empleado")*/
-    //private Empleado idEmpleado;
-=======
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name="idEmpresa")
+    @JoinColumn(name = "idEmpresa")
     private Empresa idEmpresa;
 
 
     @JsonBackReference(value = "empleado-movimientoDinero")
     @ManyToOne
-    @JoinColumn(name="idEmpleado")
+    @JoinColumn(name = "idEmpleado")
     private Empleado idEmpleado;
->>>>>>> d0ff8f5 (Relacion de Entidades, codigo funcionando)
-
 
     public MovimientoDinero() {
     }
@@ -65,8 +54,6 @@ public class MovimientoDinero {
         this.concepto = concepto;
     }
 
-<<<<<<< HEAD
-=======
     public Empresa getIdEmpresa() {
         return idEmpresa;
     }
@@ -82,5 +69,5 @@ public class MovimientoDinero {
     public void setIdEmpleado(Empleado idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
->>>>>>> d0ff8f5 (Relacion de Entidades, codigo funcionando)
+
 }
