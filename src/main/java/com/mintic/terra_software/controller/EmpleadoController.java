@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("empleados")
 public class EmpleadoController {
     @Autowired
     private ImpEmpleadoService impEmpleadoService;
 
-    @GetMapping ("/obtener")
+    @GetMapping ("")
     public ResponseEntity <List<Empleado>>obtenerUsuarios (){
 
         return new ResponseEntity<>(impEmpleadoService.obtenerEmpleados(), HttpStatus.OK);
     }
 
-    @PostMapping("/crear")
+    @PostMapping("")
     public ResponseEntity<List<Empleado>> guardarEmpleado (@RequestBody Empleado empleado){
         impEmpleadoService.guardar(empleado);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -36,12 +36,16 @@ public class EmpleadoController {
         return new ResponseEntity<>(impEmpleadoService.modificar(id, empleado), HttpStatus.OK);
     }
 
-    @GetMapping("/obtener/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Empleado>  buscarXid (@PathVariable("id") Long id){
         return new ResponseEntity<>(impEmpleadoService.empeladoxId(id), HttpStatus.OK);
     }
 
- 
+    @DeleteMapping("/{id}")
+    public String borrarEmpleado(@PathVariable Long id){
+        impEmpleadoService.eliminar(id);
+        return "El empleado con id: "+id+" ha sido eliminado!!";
+    }
 
 }
 
