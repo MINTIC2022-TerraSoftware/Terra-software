@@ -25,7 +25,7 @@ public class EmpresaController {
     public String buscarTodas (Model model, Pageable page){
         Page<Empresa> lista = impEmpresaService.buscarTodas(page);
         model.addAttribute("empresas", lista);
-        return "empresas/empresas";
+        return "empresas/lista-empresas";
     }
 
     @PostMapping("/crear")
