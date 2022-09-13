@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class HomeController {
 
-    @GetMapping("/home")
+    @GetMapping("/")
     public String home(Model model){
 
         return "home";
