@@ -1,12 +1,13 @@
 package com.mintic.terra_software.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "Movimientos")
+@Table(name = "movimientos")
 public class MovimientoDinero {
     @Id
     @Column(name = "id")
@@ -15,16 +16,25 @@ public class MovimientoDinero {
     private double monto;
     private String concepto;
 
+    @JsonBackReference
     @ManyToOne
-    @JoinColumn(name="id_empresa")
+    @JoinColumn(name = "idEmpresa")
     private Empresa idEmpresa;
 
+    @JsonBackReference(value = "empleado-movimientoDinero")
     @ManyToOne
     @JoinColumn(name="id_empleado")
     private Empleado idEmpleado;
 
-
     public MovimientoDinero() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public double getMonto() {
@@ -43,30 +53,18 @@ public class MovimientoDinero {
         this.concepto = concepto;
     }
 
-    /**
-     * @return Empresa return the idEmpresa
-     */
     public Empresa getIdEmpresa() {
         return idEmpresa;
     }
 
-    /**
-     * @param idEmpresa the idEmpresa to set
-     */
     public void setIdEmpresa(Empresa idEmpresa) {
         this.idEmpresa = idEmpresa;
     }
 
-    /**
-     * @return Empleado return the idEmpleado
-     */
     public Empleado getIdEmpleado() {
         return idEmpleado;
     }
 
-    /**
-     * @param idEmpleado the idEmpleado to set
-     */
     public void setIdEmpleado(Empleado idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
