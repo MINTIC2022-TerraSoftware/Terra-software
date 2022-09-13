@@ -1,25 +1,29 @@
 package com.mintic.terra_software.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "empleado")
+@Table(name = "empleados")
 public class Empleado {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
     private String nombreEmpleado;
     private String correoEmpleado;
-    private String nombreEmpresaEmpleado;
+    private EnumRol rolEmpleado;
 
-    /*@ManyToOne
-    @JoinColumn(name="rolempleado")*/
-    private String rolEmpleado;
-
-    @ManyToOne
-    @JoinColumn(name="id_empresa")
+    @JsonBackReference
+    @ManyToOne()
     private Empresa idEmpresa;
+
+    @JsonManagedReference(value = "empleado-movimientoDinero")
+    @OneToMany(mappedBy = "idEmpleado", orphanRemoval = true)
+    private List<MovimientoDinero> listaMovimientosEmpleado;
 
     public Long getId() {
         return id;
@@ -48,43 +52,36 @@ public class Empleado {
         this.correoEmpleado = correoEmpleado;
     }
 
-    public String getNombreEmpresaEmpleado() {
-        return nombreEmpresaEmpleado;
-    }
-
-    public void setNombreEmpresaEmpleado(String nombreEmpresaEmpleado) {
-        this.nombreEmpresaEmpleado = nombreEmpresaEmpleado;
-    }
-
-    public String getRolEmpleado() {
+    public EnumRol getRolEmpleado() {
         return rolEmpleado;
     }
 
-    public void setRolEmpleado(String rolEmpleado) {
+    public void setRolEmpleado(EnumRol rolEmpleado) {
         this.rolEmpleado = rolEmpleado;
     }
 
-    
-    /**
-     * @return Empresa return the idEmpresa
-     */
     public Empresa getIdEmpresa() {
         return idEmpresa;
     }
 
-    /**
-     * @param idEmpresa the idEmpresa to set
-     */
     public void setIdEmpresa(Empresa idEmpresa) {
         this.idEmpresa = idEmpresa;
     }
-    
-    public Empleado(String nombreEmpleado, String correoEmpleado, String nombreEmpresaEmpleado, String rolEmpleado, Empresa idEmpresa) {
+
+    public List<MovimientoDinero> getListaMovimientosEmpleado() {
+        return listaMovimientosEmpleado;
+    }
+
+    public void setListaMovimientosEmpleado(List<MovimientoDinero> listaMovimientosEmpleado) {
+        this.listaMovimientosEmpleado = listaMovimientosEmpleado;
+    }
+
+    public Empleado(String nombreEmpleado, String correoEmpleado, String nombreEmpresaEmpleado, EnumRol rolEmpleado, Empresa idEmpresa) {
         this.nombreEmpleado = nombreEmpleado;
         this.correoEmpleado = correoEmpleado;
-        this.nombreEmpresaEmpleado = nombreEmpresaEmpleado;
         this.rolEmpleado = rolEmpleado;
         this.idEmpresa= idEmpresa;
+        this.listaMovimientosEmpleado = listaMovimientosEmpleado;
     }
 
 
