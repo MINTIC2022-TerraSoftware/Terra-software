@@ -4,12 +4,16 @@ import com.mintic.terra_software.model.Empresa;
 import com.mintic.terra_software.service.ImpEmpresaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/enterprises")
 @Slf4j
 public class EmpresaController {
@@ -18,8 +22,10 @@ public class EmpresaController {
     private ImpEmpresaService impEmpresaService;
 
     @GetMapping("/obtener")
-    public ResponseEntity<List<Empresa>>  buscarTodas (){
-        return new ResponseEntity<>(impEmpresaService.buscarTodas(), HttpStatus.OK);
+    public String buscarTodas (Model model, Pageable page){
+        Page<Empresa> lista = impEmpresaService.buscarTodas(page);
+        model.addAttribute("empresas", lista);
+        return "empresas/lista-empresas";
     }
 
     @PostMapping("/crear")
@@ -33,8 +39,14 @@ public class EmpresaController {
         return new ResponseEntity<>(impEmpresaService.empresaXId(id), HttpStatus.OK);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/modificar/{id}")
     public ResponseEntity<Empresa>  modificar (@PathVariable("id") Long id, @RequestBody Empresa empresa){
         return new ResponseEntity<>(impEmpresaService.modificar(id, empresa), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    public String borrarEmpresa (@PathVariable Long id){
+        impEmpresaService.eliminar(id);
+        return "Empresa con id: "+id+" ha sido eliminada!";
     }
 }

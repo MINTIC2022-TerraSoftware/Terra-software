@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title> APP.</title>
+    <!-- Bootstrap core CSS -->
+     <!-- Custom styles for this template -->
+    <link th:href="@{/bootstrap/css/styles.css}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
 <body>
-    <h1 th:text="${mensaje}"></h1>
+<div class="wrapper d-flex align-items-stretch">
+    <!-- fragment - Menú lateral-->
+    <nav id="sidebar" th:insert="fragments/sidebar :: home-sidebar-menu"></nav>
+    <!--Contenedor-->
+    <div id="content" class="p-3 p-md-2">
+        <!-- fragment - Menú superior-->
+        <nav th:insert="fragments/menu :: menu-principal"></nav>
+        <div class="card w-70">
+            <h4 class="card-header text-center bg-dark text-light">Sistema de gestión de ingresos y egresos</h4>
+            <div class="card-body text-justify">
+                    <!-- fragment - Tarjetas para usuario, empresas y movimientos en home-->
+                    <div th:insert="fragments/home/home-card-menu_ :: home-card-menu"></div>
+                </div>
+            </div>
+        <footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
+        </div>
+    </div>
+    <!--Cierra Contenedor-->
+</div>
+
+<script th:src="@{/bootstrap/js/jquery.min.js}"></script>
+<script th:src="@{/bootstrap/js/popper.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/bootstrap/js/main.js}"></script>
 </body>
+
 </html>

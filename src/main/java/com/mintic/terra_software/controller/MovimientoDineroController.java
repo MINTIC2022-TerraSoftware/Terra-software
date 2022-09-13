@@ -21,7 +21,7 @@ public class MovimientoDineroController {
 
     //GET todos los movimientos
 
-    @GetMapping("/obtener")
+    @GetMapping("")
     public List<MovimientoDinero> buscarTodos() {
         return this.movimientoDineroService.buscarMovimientos();
     }
@@ -35,12 +35,12 @@ public class MovimientoDineroController {
         }
     }
     //POST 1 movimiento
-    @PostMapping("/crear")
+    @PostMapping("")
     public MovimientoDinero colocarUnMovimiento(@RequestBody MovimientoDinero movimiento){
         return movimientoDineroService.guardarMovimietno(movimiento);
     }
     //GET 1 movimiento
-    @GetMapping("/obtener/{id}")
+    @GetMapping("/{id}")
     public MovimientoDinero cogerUnaEmpresa(@PathVariable Long id){
         try {
             return movimientoDineroService.movimientoXId(id);

@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class MovimientoDineroService implements ImpMovimientoDineroService{
 
-    @Autowired
+
     private MovimientoDineroRepository movimientoDineroRepository;
 
     public MovimientoDineroService(MovimientoDineroRepository movimientoDineroRepository) {
