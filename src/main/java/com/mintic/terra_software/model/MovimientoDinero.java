@@ -71,4 +71,12 @@ public class MovimientoDinero {
         this.idEmpleado = idEmpleado;
     }
 
+    public MovimientoDinero(double monto, String concepto, Empresa idEmpresa, Empleado idEmpleado)
+    {
+        this.monto = monto;
+        this.concepto = concepto;
+        this.idEmpresa = idEmpresa;
+        this.idEmpleado = idEmpleado;
+    }
+
 }
