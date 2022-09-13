@@ -8,38 +8,48 @@
     <link rel="icon" href="favicon.ico">
 
     <title></title>
-    <!-- Bootstrap core CSS -->
+
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/bootstrap/css/styles.css}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
-
-<header th:insert="fragments/menu :: menu-principal"></header>
-
-<main role="main">
-    <hr>
-    <br>
-    <br>
-    <div class="col d-flex justify-content-center">
-        <div class="card w-50">
-            <h4 class="card-header text-center">Acerca de la aplicación<strong> Terra Software</strong></h4>
-            <div class="card-body">
-                <p>
-                    <h4>Desarrollado por: </h4>
-                </p>
+    <main role="main">
+        <div class="wrapper d-flex align-items-stretch">
+            <nav id="sidebar" th:insert="fragments/sidebar :: home-sidebar-menu"></nav>
+            <div id="content" class="p-3 p-md-2">
+                <nav th:insert="fragments/menu :: menu-principal"></nav>
+                <section>
+                    <article>
+                    </article>
+                    <article>
+                        <div class="col d-flex justify-content-center">
+                            <div class="card w-70">
+                                <h4 class="card-header text-center bg-dark text-light">Acerca de la aplicación<strong> Terra Software</strong>
+                                </h4>
+                                <div class="card-body text-justify">
+                                    <h2>Desarrollado por: </h2>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                        deserunt mollit anim id est laborum.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </section>
             </div>
         </div>
-    </div> <!-- /container -->
-</main>
+    </main>
 
-<footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
-<script th:src="@{/bootstrap/js/scripts.js}"></script>
+    <footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
+    <script th:src="@{/bootstrap/js/jquery.min.js}"></script>
+    <script th:src="@{/bootstrap/js/popper.js}"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/bootstrap/js/main.js}"></script>
 </body>
 </html>
