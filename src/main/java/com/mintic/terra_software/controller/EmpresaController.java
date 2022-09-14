@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.util.List;
 
 @Controller
@@ -28,10 +30,16 @@ public class EmpresaController {
         return "empresas/lista-empresas";
     }
 
-    @PostMapping("/crear")
-    public ResponseEntity<List<Empresa>> guardarEmpresa (@RequestBody Empresa empresa){
+    @GetMapping("/crear")
+    public String crear() {
+        return "empresas/form-empresas";
+    }
+
+    @PostMapping("/guardar")
+    public String guardarEmpresa (@ModelAttribute Empresa empresa, Model model, RedirectAttributes attributes) {
         impEmpresaService.guardar(empresa);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        attributes.addFlashAttribute("msg", "Los datos de la empresa fueron guardados!");
+        return "redirect:/enterprises/obtener";
     }
 
     @GetMapping("/obtener/{id}")
