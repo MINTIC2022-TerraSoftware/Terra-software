@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
 
     <title> APP.</title>
     <!-- Bootstrap core CSS -->
@@ -26,28 +25,36 @@
         <nav th:insert="fragments/menu :: menu-principal"></nav>
         <div class="row justify-content-center">
             <div class="card" style="width: 50rem !important;">
-                <h4 class="card-header text-center bg-dark text-light">Crear empresas</h4>
-                <div class="card-body">
-                    <form th:action="@{/enterprises/guardar}" th:object="${empresa}" method="post" id="basicform">
+                <div th:if="${editar}">
+                    <h4 class="card-header text-center bg-dark text-light">Editar empresas</h4>
+                </div>
+                <div th:unless="${editar}">
+                    <h4 class="card-header text-center bg-dark text-light">Crear empresas</h4>
+                </div>
 
+                <div class="card-body" th:with="baseUrl=(${editar}==false? '/enterprises/guardar' : '/enterprises/modificar/'+${empresa.id})">
+                    <form th:action="@{${baseUrl}}" th:object="${empresa}" method="post" id="basicform">
+                        <div th:if="${editar}">
+                            <input type="hidden" name="_method" value="PATCH" />
+                        </div>
                          <div class="form-group">
                             <label for="inputUserName">Nombre</label>
-                            <input id="inputUserName" type="text" name="nombre" required="" placeholder="Ingrese nombre"
+                            <input id="inputUserName" type="text"  th:value="${empresa != null} ? ${empresa.nombre}" name="nombre" required="" placeholder="Ingrese nombre"
                                    autocomplete="on" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="inputEmail">Dirección</label>
-                            <input id="inputEmail" type="text" name="direccion" required="" placeholder="Ingrese dirección"
+                            <label for="inputDireccion">Dirección</label>
+                            <input id="inputDireccion" type="text" th:value="${empresa != null} ? ${empresa.direccion}" name="direccion" required="" placeholder="Ingrese dirección"
                                    autocomplete="on" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="inputTelefono">Teléfono</label>
-                            <input id="inputTelefono" name="telefono" type="number" placeholder="Ingrese teléfono"
+                            <input id="inputTelefono" name="telefono" type="number"  th:value="${empresa != null} ? ${empresa.nit}" placeholder="Ingrese teléfono"
                                    required="" autocomplete="on" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="inputNit">Nit</label>
-                            <input id="inputNit" name="nit" type="number" required="true" placeholder="Ingrese Nit"
+                            <input id="inputNit" name="nit" type="number" th:value="${empresa != null} ? ${empresa.nit}" required="true" placeholder="Ingrese Nit"
                                    autocomplete="on" class="form-control">
                         </div>
                         <div class="row">
@@ -73,8 +80,8 @@
 <script th:src="@{/bootstrap/js/popper.js}"></script>
 <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
 <script th:src="@{/bootstrap/js/main.js}"></script>
+<script th:src="@{/tinymce/tinymce.min.js}"></script>
 </body>
 
-<footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
 
 </html>

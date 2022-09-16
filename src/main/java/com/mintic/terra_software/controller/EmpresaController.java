@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +32,9 @@ public class EmpresaController {
     }
 
     @GetMapping("/crear")
-    public String crear() {
+    public String crear(Model model) {
+        model.addAttribute("editar", false);
+        model.addAttribute("empresa", null);
         return "empresas/form-empresas";
     }
 
@@ -43,18 +46,26 @@ public class EmpresaController {
     }
 
     @GetMapping("/obtener/{id}")
-    public ResponseEntity<Empresa>  buscarXid (@PathVariable("id") Long id){
-        return new ResponseEntity<>(impEmpresaService.empresaXId(id), HttpStatus.OK);
+    public String buscarXid (@PathVariable("id") Long id,  Model model){
+
+        Empresa empresa = impEmpresaService.empresaXId(id);
+        model.addAttribute("editar", true);
+        model.addAttribute("empresa", empresa);
+        return "empresas/form-empresas";
     }
 
-    @PatchMapping("/modificar/{id}")
-    public ResponseEntity<Empresa>  modificar (@PathVariable("id") Long id, @RequestBody Empresa empresa){
-        return new ResponseEntity<>(impEmpresaService.modificar(id, empresa), HttpStatus.OK);
+
+    @RequestMapping(value = "/modificar/{id}",method = RequestMethod.PATCH, consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    public String  modificar (@PathVariable("id") Long id, Empresa empresa, RedirectAttributes attributes){
+        impEmpresaService.modificar(id, empresa);
+        attributes.addFlashAttribute("msg", "Los datos de la empresa fueron modificados!");
+        return "redirect:/enterprises/obtener";
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public String borrarEmpresa (@PathVariable Long id){
+    public String borrarEmpresa (@PathVariable Long id, RedirectAttributes attributes){
         impEmpresaService.eliminar(id);
-        return "Empresa con id: "+id+" ha sido eliminada!";
+        attributes.addFlashAttribute("msg", "La empresa fue eliminada!.");
+        return "redirect:/enterprises/obtener";
     }
 }

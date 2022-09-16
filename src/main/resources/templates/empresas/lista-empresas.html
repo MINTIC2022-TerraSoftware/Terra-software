@@ -34,12 +34,13 @@
                 <table class="table table-hover-md table-responsive-sm table-bordered first">
                     <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Dirección</th>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Dirección</th>
                         <th scope="col">Teléfono</th>
                         <th scope="col">Nit</th>
-                        <th scope="col">Acciones</th>
+                        <th class="col-1">Edit</th>
+                        <th class="col-1">Delete</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -50,13 +51,23 @@
                         <td th:text="${empresa.telefono}">Teléfono de la empresa</td>
                         <td th:text="${empresa.nit}">Nit de la empresa</td>
                         <td>
-                            <a href="#" target="_blank" class="btn btn-success btn-sm" role="button"
+                            <a th:href="@{/enterprises/obtener/{id} (id=${empresa.id})}" class="btn btn-success btn-sm"
+                               role="button"
                                title="Editar ."><i class="fas fa-pencil-alt"></i>
                             </a>
-                            <a href="#" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm"
+                            <!--<a th:href="@{/enterprises/eliminar/{id} (id=${empresa.id}) }" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm"
                                role="button" title="Eliminar empresa.">
+                                <input name="_method" type="hidden" value="DELETE" />
                                 <i class="fas fa-trash" aria-hidden="true"></i>
-                            </a>
+                            </a>-->
+                        </td>
+                        <td>
+                            <form th:action="@{/enterprises/eliminar/{id} (id=${empresa.id}) }" method="post">
+                                <input type="hidden" name="_method" value="DELETE"/>
+                                <button id="eliminar" th:onclick="'javascript:myFunction(' + ${empresa.id} + ')'" type="submit" class="btn btn-success btn-sm">
+                                    <i class="fas fa-trash" aria-hidden="true"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                     </tbody>
@@ -66,6 +77,13 @@
         <footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
     </div>
 </div>
+
+<script th:inline="javascript">
+    function myFunction(empresa) {
+        let msg= 'desea eliminar la tienda: ' + empresa;
+        alert(msg);
+    }
+</script>
 
 <script th:src="@{/bootstrap/js/jquery.min.js}"></script>
 <script th:src="@{/bootstrap/js/popper.js}"></script>
