@@ -48,7 +48,7 @@ public class MovimientoDineroService implements ImpMovimientoDineroService{
     }
 
     @Override
-    public MovimientoDinero movimientoXId(Long idMovimiento) {
+    public MovimientoDinero encontrarMovimientoXId(Long idMovimiento) {
         return movimientoDineroRepository.findById(idMovimiento).get();
     }
 

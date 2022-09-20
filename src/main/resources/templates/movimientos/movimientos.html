@@ -25,9 +25,50 @@
     <div id="content" class="p-3 p-md-2">
         <nav th:insert="fragments/menu :: menu-principal"></nav>
         <div class="card mt-1">
-            <h4 class="card-header mb-1 bg-dark text-light"><strong>Gestionar empresas</strong></h4>
+            <h4 class="card-header mb-1 bg-dark text-light"><strong>Gestionar movimientos</strong></h4>
             <div class="card-body">
-                <!-- contenido aca-->
+                <div>
+                    <a href="/movimientos/crear" class="btn btn-success">Crear Movimiento</a>
+                </div>
+                <hr>
+                <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
+                <table class="table table-hover-md table-responsive-sm table-bordered first">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Monto</th>
+                        <th>Concepto</th>
+                        <th scope="col">Empresa</th>
+                        <th scope="col">Empleado</th>
+                        <th class="col-1">Edit</th>
+                        <th class="col-1">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="movimientos : ${movimientos}">
+                        <th scope="row" th:text="${movimientos.id}">1</th>
+                        <td th:text="${movimientos.monto}">Monto</td>
+                        <td th:text="${movimientos.concepto}">Concepto</td>
+                        <td th:text="${movimientos.idEmpresa.id}">Id_Empresa</td>
+                        <td th:text="${movimientos.idEmpleado.id}">Id_Empleado</td>
+                        <td>
+                            <a th:href="@{/movimientos/{id}/actualizar(id=${movimientos.id})}" class="btn btn-success btn-sm"
+                               role="button"
+                               title="Editar ."><i class="fas fa-pencil-alt"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <form th:action="@{/movimientos/{id}(id=${movimientos.id})}"  th:method="delete">
+                                <input type="hidden" name="_method" value="DELETE"/>
+                                <button id="eliminar" th:onclick="'javascript:myFunction(' + ${movimientos.id} + ')'" type="submit" class="btn btn-success btn-sm">
+                                    <i class="fas fa-trash" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
             </div>
         </div>
     </div>

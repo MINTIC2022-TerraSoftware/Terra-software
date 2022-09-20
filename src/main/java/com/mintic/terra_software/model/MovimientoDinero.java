@@ -12,7 +12,7 @@ public class MovimientoDinero {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    public long id;
     private double monto;
     private String concepto;
 
@@ -23,7 +23,7 @@ public class MovimientoDinero {
 
     @JsonBackReference(value = "empleado-movimientoDinero")
     @ManyToOne
-    @JoinColumn(name="id_empleado")
+    @JoinColumn(name="idEmpleado")
     private Empleado idEmpleado;
 
     public MovimientoDinero() {

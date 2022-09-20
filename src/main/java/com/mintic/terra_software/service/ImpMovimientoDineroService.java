@@ -15,5 +15,5 @@ public interface ImpMovimientoDineroService {
 
     void eliminarMovimiento(MovimientoDinero movimiento);
 
-    MovimientoDinero movimientoXId(Long idMovimiento);
+    MovimientoDinero encontrarMovimientoXId(Long idMovimiento);
 }
