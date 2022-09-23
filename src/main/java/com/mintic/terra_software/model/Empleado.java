@@ -76,7 +76,7 @@ public class Empleado {
         this.listaMovimientosEmpleado = listaMovimientosEmpleado;
     }
 
-    public Empleado(String nombreEmpleado, String correoEmpleado, String nombreEmpresaEmpleado, EnumRol rolEmpleado, Empresa idEmpresa) {
+    public Empleado(String nombreEmpleado, String correoEmpleado, EnumRol rolEmpleado, Empresa idEmpresa, List<MovimientoDinero> listaMovimientosEmpleado) {
         this.nombreEmpleado = nombreEmpleado;
         this.correoEmpleado = correoEmpleado;
         this.rolEmpleado = rolEmpleado;
