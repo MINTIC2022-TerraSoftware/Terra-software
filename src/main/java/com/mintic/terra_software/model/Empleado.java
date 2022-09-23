@@ -2,11 +2,13 @@ package com.mintic.terra_software.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Data
 @Table(name = "empleados")
 public class Empleado {
     @Id
@@ -16,6 +18,8 @@ public class Empleado {
     private String nombreEmpleado;
     private String correoEmpleado;
     private EnumRol rolEmpleado;
+
+    private String password;
 
     @JsonBackReference
     @ManyToOne()

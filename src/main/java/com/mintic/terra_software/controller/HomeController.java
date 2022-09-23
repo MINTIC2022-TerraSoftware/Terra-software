@@ -1,11 +1,12 @@
 package com.mintic.terra_software.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 @org.springframework.stereotype.Controller
 
 public class HomeController {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/")
     public String home(Model model){
@@ -45,7 +49,20 @@ public class HomeController {
      */
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {
+        SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+        logoutHandler.logout(request, null, null);
         return "redirect:/";
+    }
+
+    /**
+     * Utileria para encriptar texto con el algorito BCrypt
+     * @param texto
+     * @return
+     */
+    @GetMapping("/bcrypt/{texto}")
+    @ResponseBody
+    public String encriptar(@PathVariable("texto") String texto) {
+        return texto + " Encriptado en Bcrypt: " + passwordEncoder.encode(texto);
     }
 
 

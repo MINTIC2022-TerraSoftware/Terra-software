@@ -1,6 +1,5 @@
-package net.itinajero.security;
+package com.mintic.terra_software.security;
 
-import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -41,16 +42,15 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
                 "/bootstrap/**",                        
                 "/images/**",
                 "/tinymce/**",
-                "/logos/**").permitAll()
+                "/logos/**",
+				"/assets/**").permitAll()
         
         // Las vistas públicas no requieren autenticación
         .antMatchers("/", 
         			 "/login",
         			 "/signup",
-        			 "/search",
         			 "/bcrypt/**",
-        			 "/about",
-        			 "/vacantes/view/**").permitAll()
+        			 "/about").permitAll()
         
         // Asignar permisos a URLs por ROLES
         .antMatchers("/solicitudes/create/**",
