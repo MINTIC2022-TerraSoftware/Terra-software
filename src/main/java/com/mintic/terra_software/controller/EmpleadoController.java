@@ -13,18 +13,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("empleados")
+@RequestMapping("/empleados")
 public class EmpleadoController {
     @Autowired
     private ImpEmpleadoService impEmpleadoService;
 
-    @GetMapping ("")
+    @GetMapping ("/obtener")
     public ResponseEntity <List<Empleado>>obtenerUsuarios (){
 
         return new ResponseEntity<>(impEmpleadoService.obtenerEmpleados(), HttpStatus.OK);
+       
     }
 
-    @PostMapping("")
+    @PostMapping("/crear")
     public ResponseEntity<List<Empleado>> guardarEmpleado (@RequestBody Empleado empleado){
         impEmpleadoService.guardar(empleado);
         return new ResponseEntity<>(HttpStatus.CREATED);
