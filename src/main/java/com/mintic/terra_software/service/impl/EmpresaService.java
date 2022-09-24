@@ -1,24 +1,23 @@
-package com.mintic.terra_software.service;
+package com.mintic.terra_software.service.impl;
 
 import com.mintic.terra_software.model.Empresa;
 import com.mintic.terra_software.repository.EmpresaRepository;
+import com.mintic.terra_software.service.IEmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class    EmpresaService implements ImpEmpresaService {
+public class    EmpresaService implements IEmpresaService {
 
     @Autowired
     private EmpresaRepository empresaRepository;
 
     @Override
-    public Page<Empresa> buscarTodas(Pageable page) {
-        return empresaRepository.findAll(page);
+    public List<Empresa> buscarTodas() {
+        return empresaRepository.findAll();
     }
 
     @Override

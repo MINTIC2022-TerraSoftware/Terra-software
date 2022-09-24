@@ -1,14 +1,14 @@
-package com.mintic.terra_software.service;
+package com.mintic.terra_software.service.impl;
 
 import com.mintic.terra_software.model.MovimientoDinero;
 import com.mintic.terra_software.repository.MovimientoDineroRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.mintic.terra_software.service.IMovimientoDineroService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class MovimientoDineroService implements ImpMovimientoDineroService{
+public class MovimientoDineroService implements IMovimientoDineroService {
 
 
     private MovimientoDineroRepository movimientoDineroRepository;

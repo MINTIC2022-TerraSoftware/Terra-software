@@ -1,52 +1,67 @@
 package com.mintic.terra_software.controller;
 
 import com.mintic.terra_software.model.Empleado;
-import com.mintic.terra_software.model.Empresa;
-import com.mintic.terra_software.model.MovimientoDinero;
-import com.mintic.terra_software.service.EmpleadoService;
-import com.mintic.terra_software.service.ImpEmpleadoService;
+import com.mintic.terra_software.service.IEmpleadoService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/empleados")
+@Slf4j
 public class EmpleadoController {
     @Autowired
-    private ImpEmpleadoService impEmpleadoService;
+    private IEmpleadoService impEmpleadoService;
 
     @GetMapping ("/obtener")
-    public ResponseEntity <List<Empleado>>obtenerUsuarios (){
-
-        return new ResponseEntity<>(impEmpleadoService.obtenerEmpleados(), HttpStatus.OK);
-       
+    public String obtenerEmpleados (Model model){
+        List<Empleado> lista = this.impEmpleadoService.obtenerEmpleados();
+        model.addAttribute("empleados", lista);
+        return "empleados/lista-empleados";
     }
 
-    @PostMapping("/crear")
-    public ResponseEntity<List<Empleado>> guardarEmpleado (@RequestBody Empleado empleado){
+    @GetMapping("/crear")
+    public String crearEmpleado (Model model){
+        model.addAttribute("editar", false);
+        model.addAttribute("empresa", null);
+        return "empleados/form-empleados";
+    }
+
+    @PostMapping("/guardar")
+    public String guardarEmpleado (@ModelAttribute Empleado empleado, RedirectAttributes attributes){
         impEmpleadoService.guardar(empleado);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        attributes.addFlashAttribute("msg", "Los datos del empleado fueron guardados!");
+        return "redirect:/empleados/obtener";
     }
 
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Empleado>  modificar (@PathVariable("id") Long id, @RequestBody Empleado empleado){
-        return new ResponseEntity<>(impEmpleadoService.modificar(id, empleado), HttpStatus.OK);
+    @GetMapping("/obtener/{id}")
+    public String buscarXid (@PathVariable("id") Long id, Model model){
+        Empleado empleado = impEmpleadoService.empeladoxId(id);
+        model.addAttribute("editar", true);
+        model.addAttribute("empleado", empleado);
+        return "empleados/form-empleados";
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Empleado>  buscarXid (@PathVariable("id") Long id){
-        return new ResponseEntity<>(impEmpleadoService.empeladoxId(id), HttpStatus.OK);
+    @RequestMapping(value = "/modificar/{id}",method = RequestMethod.PATCH, consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    public String  modificar (@PathVariable("id") Long id, Empleado empleado, RedirectAttributes attributes){
+        impEmpleadoService.modificar(id, empleado);
+        attributes.addFlashAttribute("msg", "Los datos del empleado fueron modificados!");
+        return "redirect:/empleados/obtener";
     }
 
-    @DeleteMapping("/{id}")
-    public String borrarEmpleado(@PathVariable Long id){
+    @DeleteMapping("/eliminar/{id}")
+    public String borrarEmpleado(@PathVariable Long id, RedirectAttributes attributes){
         impEmpleadoService.eliminar(id);
-        return "El empleado con id: "+id+" ha sido eliminado!!";
+        attributes.addFlashAttribute("msg", "el empleado fue eliminado!.");
+        return "redirect:/empleados/obtener";
     }
+
 
 }
 

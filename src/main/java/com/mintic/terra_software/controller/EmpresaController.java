@@ -1,14 +1,10 @@
 package com.mintic.terra_software.controller;
 
 import com.mintic.terra_software.model.Empresa;
-import com.mintic.terra_software.service.ImpEmpresaService;
+import com.mintic.terra_software.service.IEmpresaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,11 +18,11 @@ import java.util.List;
 public class EmpresaController {
 
     @Autowired
-    private ImpEmpresaService impEmpresaService;
+    private IEmpresaService impEmpresaService;
 
     @GetMapping("/obtener")
-    public String buscarTodas (Model model, Pageable page){
-        Page<Empresa> lista = impEmpresaService.buscarTodas(page);
+    public String buscarTodas (Model model){
+        List<Empresa> lista = impEmpresaService.buscarTodas();
         model.addAttribute("empresas", lista);
         return "empresas/lista-empresas";
     }
@@ -47,13 +43,11 @@ public class EmpresaController {
 
     @GetMapping("/obtener/{id}")
     public String buscarXid (@PathVariable("id") Long id,  Model model){
-
         Empresa empresa = impEmpresaService.empresaXId(id);
         model.addAttribute("editar", true);
         model.addAttribute("empresa", empresa);
         return "empresas/form-empresas";
     }
-
 
     @RequestMapping(value = "/modificar/{id}",method = RequestMethod.PATCH, consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public String  modificar (@PathVariable("id") Long id, Empresa empresa, RedirectAttributes attributes){

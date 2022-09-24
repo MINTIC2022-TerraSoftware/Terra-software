@@ -17,7 +17,6 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-</head>
 
 <body>
 <div class="wrapper d-flex align-items-stretch">
@@ -37,19 +36,17 @@
                         <th>Id</th>
                         <th>Nombre</th>
                         <th>Correo</th>
-                       <!--  <th scope="col">Empresa</th> -->
-                        <th scope="col">Rol</th>
+                        <th scope="col">Username</th>
                         <th class="col-1">Edit</th>
                         <th class="col-1">Delete</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="empleado : ${empleados.content}">
+                    <tr th:each="empleado : ${empleados}">
                         <th scope="row" th:text="${empleado.id}">1</th>
                         <td th:text="${empleado.nombreEmpleado}">Nombre del empleado</td>
                         <td th:text="${empleado.correoEmpleado}">Correo electrónico</td>
-                       <!--  <td th:text="${empleado.idEmpresa}">Empresa que pertenece</td> -->
-                        <td th:text="${empleado.rolEmpleado}">Rol que desempeña</td>
+                        <td th:text="${empleado.username}">Username</td>
                         <td>
                             <a th:href="@{/empleados/obtener/{id} (id=${empleado.id})}" class="btn btn-success btn-sm"
                                role="button"
@@ -59,7 +56,8 @@
                         <td>
                             <form th:action="@{/empleados/eliminar/{id} (id=${empleado.id}) }" method="post">
                                 <input type="hidden" name="_method" value="DELETE"/>
-                                <button id="eliminar" th:onclick="'javascript:myFunction(' + ${empleado.id} + ')'" type="submit" class="btn btn-success btn-sm">
+                                <button id="eliminar" th:onclick="'javascript:myFunction(' + ${empleado.id} + ')'"
+                                        type="submit" class="btn btn-success btn-sm">
                                     <i class="fas fa-trash" aria-hidden="true"></i>
                                 </button>
                             </form>
@@ -75,7 +73,7 @@
 
 <script th:inline="javascript">
     function myFunction(empleado) {
-        let msg= 'desea eliminar al empleado: ' + empleado;
+        let msg= 'desea eliminar el empleado: ' + empleado;
         alert(msg);
     }
 </script>

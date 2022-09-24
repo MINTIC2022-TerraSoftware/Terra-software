@@ -44,7 +44,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="empresa : ${empresas.content}">
+                    <tr th:each="empresa : ${empresas}">
                         <th scope="row" th:text="${empresa.id}">1</th>
                         <td th:text="${empresa.nombre}">Nombre de la empresa</td>
                         <td th:text="${empresa.direccion}">Dirección de la empresa</td>

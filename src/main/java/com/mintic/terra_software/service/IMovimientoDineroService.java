@@ -1,11 +1,10 @@
 package com.mintic.terra_software.service;
 
-import com.mintic.terra_software.model.Empresa;
 import com.mintic.terra_software.model.MovimientoDinero;
 
 import java.util.List;
 
-public interface ImpMovimientoDineroService {
+public interface IMovimientoDineroService {
 
     List<MovimientoDinero> buscarMovimientos();
 

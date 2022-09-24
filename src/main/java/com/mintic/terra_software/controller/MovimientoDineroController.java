@@ -2,7 +2,7 @@ package com.mintic.terra_software.controller;
 
 
 import com.mintic.terra_software.model.MovimientoDinero;
-import com.mintic.terra_software.service.MovimientoDineroService;
+import com.mintic.terra_software.service.impl.MovimientoDineroService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.nio.file.Path;
 import java.util.List;
 
 @Controller

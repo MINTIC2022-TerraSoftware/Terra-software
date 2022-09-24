@@ -33,30 +33,47 @@
                 </div>
 
                 <div class="card-body" th:with="baseUrl=(${editar}==false? '/empleados/guardar' : '/empleados/modificar/'+${empleado.id})">
+
                     <form th:action="@{${baseUrl}}" th:object="${empleado}" method="post" id="basicform">
                         <div th:if="${editar}">
                             <input type="hidden" name="_method" value="PATCH" />
                         </div>
+
                          <div class="form-group">
-                            <label for="inputUserName">Nombre</label>
-                            <input id="inputUserName" type="text"  th:value="${empleado != null} ? ${empleado.nombreEmpleado}" name="nombre" required="" placeholder="Ingrese nombre"
+                            <label for="inputNombre">Nombre</label>
+                            <input id="inputNombre" type="text"  th:value="${empleado != null} ? ${empleado.nombreEmpleado}" name="nombreEmpleado" required="" placeholder="Ingrese nombre"
                                    autocomplete="on" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="inputCorreo">E.mail</label>
-                            <input id="inputCorreo" type="text" th:value="${empleado != null} ? ${empleado.correoEmpleado}" name="correo" required="" placeholder="Ingrese correo"
+                            <input id="inputCorreo" type="text" th:value="${empleado != null} ? ${empleado.correoEmpleado}" name="correoEmpleado" required="" placeholder="Ingrese correo"
                                    autocomplete="on" class="form-control">
                         </div>
+                        <!--
                         <div class="form-group">
                             <label for="inputRol">Rol</label>
-                            <input id="inputRol" name="rol" type="number"  th:value="${empresa != null} ? ${empresa.rolEmpleado}" placeholder="Ingrese el rol"
+                            <input id="inputRol" name="rolEmpleado" type="text"  th:value="${empleado != null} ? ${empleado.rolEmpleado}" placeholder="Ingrese el rol"
                                    required="" autocomplete="on" class="form-control">
                         </div>
+                        -->
+                        <div class="form-group">
+                            <label for="inputUsername">Username</label>
+                            <input id="inputUsername" name="username" type="text"  th:value="${empleado != null} ? ${empleado.username}" placeholder="Ingrese username"
+                                   required="true" autocomplete="on" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPass">Password</label>
+                            <input id="inputPass" name="password" type="password"  th:value="${empleado != null} ? ${empleado.password}" placeholder="Ingrese el rol"
+                                   required="true" autocomplete="on" class="form-control">
+                        </div>
+
                         <div class="form-group">
                             <label for="inputEmpresa">Empresa</label>
-                            <input id="inputEmpresa" name="empresa" type="number" th:value="${emplado != null} ? ${empleado.nit}" required="true" placeholder="Ingrese la empresa"
+                            <input id="inputEmpresa" name="idEmpresa" type="number" th:value="${empleado != null} ? ${empleado.idEmpresa.id}" required="true" placeholder="Ingrese la empresa"
                                    autocomplete="on" class="form-control">
                         </div>
+
+
                         <div class="row">
                             <div class="col-sm-12 pl-0">
                                 <p class="text-right">
@@ -66,22 +83,19 @@
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
-
         <footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
     </div>
 </div>
 <!--Cierra Contenedor-->
 </div>
-
 <script th:src="@{/bootstrap/js/jquery.min.js}"></script>
 <script th:src="@{/bootstrap/js/popper.js}"></script>
 <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
 <script th:src="@{/bootstrap/js/main.js}"></script>
 <script th:src="@{/tinymce/tinymce.min.js}"></script>
 </body>
-
-
 </html>

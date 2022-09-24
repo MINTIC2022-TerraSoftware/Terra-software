@@ -1,10 +1,10 @@
-/* package com.mintic.terra_software.service;
+package com.mintic.terra_software.service;
 
 import com.mintic.terra_software.model.Empleado;
 
 import java.util.List;
 
-public interface ImpEmpleadoService {
+public interface IEmpleadoService {
 
     List <Empleado> obtenerEmpleados();
 
@@ -17,4 +17,3 @@ public interface ImpEmpleadoService {
     void eliminar(Long id);
 
 }
- */
