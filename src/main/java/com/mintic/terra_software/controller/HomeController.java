@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 
 public class HomeController {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    /*@Autowired
+    private PasswordEncoder passwordEncoder;*/
 
     @GetMapping("/")
     public String home(Model model){
@@ -59,11 +59,11 @@ public class HomeController {
      * @param texto
      * @return
      */
-    @GetMapping("/bcrypt/{texto}")
+    /*@GetMapping("/bcrypt/{texto}")
     @ResponseBody
     public String encriptar(@PathVariable("texto") String texto) {
         return texto + " Encriptado en Bcrypt: " + passwordEncoder.encode(texto);
-    }
+    }*/
 
 
     /**

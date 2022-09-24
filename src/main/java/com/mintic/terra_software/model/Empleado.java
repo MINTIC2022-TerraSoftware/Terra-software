@@ -19,6 +19,8 @@ public class Empleado {
     private String correoEmpleado;
     private EnumRol rolEmpleado;
 
+    private EnumRol estado;
+
     private String password;
 
     @JsonBackReference
