@@ -4,7 +4,7 @@
         <div class="card card-figure text-center" sec:authorize="isAuthenticated()">
             <figure class="figure">
                 <div class="figure-img">
-                    <img class="img-fluid" th:src="@{/images/logo.png}" alt="Card image cap">
+                    <img class="img-fluid" th:src="@{/images/movimientos.png}" alt="Card image cap">
                     <div class="figure-action">
                         <a th:href="@{/movimientos}" class="btn btn-block btn-sm btn-primary">Ingresos y gastos</a>
                     </div>
@@ -19,7 +19,7 @@
         <div class="card card-figure text-center" sec:authorize="isAuthenticated()  and hasAnyAuthority('SUPERADMINISTRADOR','ADMINISTRADOR')">
             <figure class="figure">
                 <div class="figure-img">
-                    <img class="img-fluid" th:src="@{/images/logo.png}" alt="Card image cap">
+                    <img class="img-fluid" th:src="@{/images/empresas.png}" alt="Card image cap">
                     <div class="figure-action">
                         <a th:href="@{/enterprises/obtener}" class="btn btn-block btn-sm btn-primary">Empresas</a>
                     </div>
@@ -33,7 +33,7 @@
         <div class="card card-figure text-center" sec:authorize="isAuthenticated()  and hasAnyAuthority('SUPERADMINISTRADOR','ADMINISTRADOR')">
             <figure class="figure">
                 <div class="figure-img">
-                    <img class="img-fluid" th:src="@{/images/logo.png}" alt="Card image cap">
+                    <img class="img-fluid" th:src="@{/images/usuarios.png}" alt="Card image cap">
                     <div class="figure-action">
                         <a th:href="@{/empleados/obtener}" class="btn btn-block btn-sm btn-primary">Empleados</a>
                     </div>
