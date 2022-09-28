@@ -1,0 +1,66 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title></title>
+
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/styles.css}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <main role="main">
+        <div class="wrapper d-flex align-items-stretch">
+            <nav id="sidebar" th:insert="fragments/sidebar :: home-sidebar-menu"></nav>
+            <div id="content" class="p-3 p-md-2">
+                <nav th:insert="fragments/menu :: menu-principal"></nav>
+                <section>
+                    <article>
+                    </article>
+                    <article>
+                        <div class="col d-flex justify-content-center">
+                            <div class="card w-70">
+                                <h4 class="card-header text-center bg-dark text-light">Acerca de la aplicación<strong> Terra Software</strong>
+                                </h4>
+                                <div class="card-body text-justify">
+                                    <h2>Terra-software: </h2>
+                                    <p> Aplicativo web para gestionar los ingresos y egresos de una empresa.</p>
+                                    <h3>
+                                        Definición:
+                                    </h3>
+                                    <p>
+                                        Se requiere un aplicativo web para que un administrador pueda gestionar los ingresos y egresos de su empresa. El sistema debería permitir visualizar los totales de la empresa para que el gerente pueda tomar decisiones sobre la situación financiera
+                                    </p>
+                                    <p>
+                                        Integrantes:
+                                    </p>
+                                    <ul>
+                                        <li>Julián Gaviria Quintero </li>
+                                        <li>William Alvarez</li>
+                                        <li>Vicky Ospina</li>
+                                        <li>Nicolas Aponte</li>
+                                        <li>Santiago Janacet</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
+    <script th:src="@{/bootstrap/js/jquery.min.js}"></script>
+    <script th:src="@{/bootstrap/js/popper.js}"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/bootstrap/js/main.js}"></script>
+</body>
+</html>

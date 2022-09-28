@@ -4,7 +4,7 @@ import com.mintic.terra_software.model.Empresa;
 
 import java.util.List;
 
-public interface ImpEmpresaService {
+public interface IEmpresaService {
 
     List<Empresa> buscarTodas();
 

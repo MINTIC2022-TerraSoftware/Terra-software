@@ -1,40 +1,65 @@
 package com.mintic.terra_software.controller;
 
 import com.mintic.terra_software.model.Empresa;
-import com.mintic.terra_software.service.ImpEmpresaService;
+import com.mintic.terra_software.service.IEmpresaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/enterprises")
 @Slf4j
 public class EmpresaController {
 
     @Autowired
-    private ImpEmpresaService impEmpresaService;
+    private IEmpresaService impEmpresaService;
 
     @GetMapping("/obtener")
-    public ResponseEntity<List<Empresa>>  buscarTodas (){
-        return new ResponseEntity<>(impEmpresaService.buscarTodas(), HttpStatus.OK);
+    public String buscarTodas (Model model){
+        List<Empresa> lista = impEmpresaService.buscarTodas();
+        model.addAttribute("empresas", lista);
+        return "empresas/lista-empresas";
     }
 
-    @PostMapping("/crear")
-    public ResponseEntity<List<Empresa>> guardarEmpresa (@RequestBody Empresa empresa){
+    @GetMapping("/crear")
+    public String crear(Model model) {
+        model.addAttribute("editar", false);
+        model.addAttribute("empresa", null);
+        return "empresas/form-empresas";
+    }
+
+    @PostMapping("/guardar")
+    public String guardarEmpresa (@ModelAttribute Empresa empresa, Model model, RedirectAttributes attributes) {
         impEmpresaService.guardar(empresa);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        attributes.addFlashAttribute("msg", "Los datos de la empresa fueron guardados!");
+        return "redirect:/enterprises/obtener";
     }
 
     @GetMapping("/obtener/{id}")
-    public ResponseEntity<Empresa>  buscarXid (@PathVariable("id") Long id){
-        return new ResponseEntity<>(impEmpresaService.empresaXId(id), HttpStatus.OK);
+    public String buscarXid (@PathVariable("id") Long id,  Model model){
+        Empresa empresa = impEmpresaService.empresaXId(id);
+        model.addAttribute("editar", true);
+        model.addAttribute("empresa", empresa);
+        return "empresas/form-empresas";
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Empresa>  modificar (@PathVariable("id") Long id, @RequestBody Empresa empresa){
-        return new ResponseEntity<>(impEmpresaService.modificar(id, empresa), HttpStatus.OK);
+    @RequestMapping(value = "/modificar/{id}",method = RequestMethod.PATCH, consumes = {MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    public String  modificar (@PathVariable("id") Long id, Empresa empresa, RedirectAttributes attributes){
+        impEmpresaService.modificar(id, empresa);
+        attributes.addFlashAttribute("msg", "Los datos de la empresa fueron modificados!");
+        return "redirect:/enterprises/obtener";
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    public String borrarEmpresa (@PathVariable Long id, RedirectAttributes attributes){
+        impEmpresaService.eliminar(id);
+        attributes.addFlashAttribute("msg", "La empresa fue eliminada!.");
+        return "redirect:/enterprises/obtener";
     }
 }

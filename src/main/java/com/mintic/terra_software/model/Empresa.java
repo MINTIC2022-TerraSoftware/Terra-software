@@ -1,13 +1,16 @@
 package com.mintic.terra_software.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Data
-@Table(name="empresa")
+@Table(name="empresas")
 public class Empresa {
 
     @Id
@@ -18,6 +21,14 @@ public class Empresa {
     private String direccion;
     private String telefono;
     private String nit;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "idEmpresa", orphanRemoval = true)
+    private List<Empleado> listaEmpleados;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "idEmpresa", orphanRemoval = true)
+    private List<MovimientoDinero> listaMovimientosDinero;
 
 
     public Empresa(String nombre, String direccion, String telefono, String nit) {

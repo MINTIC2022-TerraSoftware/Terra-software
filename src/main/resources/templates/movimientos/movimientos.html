@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title> APP.</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/bootstrap/css/styles.css}" rel="stylesheet">
+    <link th:href="@{/assets/vendor/datatables/css/dataTables.bootstrap4.css}" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+<div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar" th:insert="fragments/sidebar :: home-sidebar-menu"></nav>
+    <div id="content" class="p-3 p-md-2">
+        <nav th:insert="fragments/menu :: menu-principal"></nav>
+        <div class="card mt-1">
+            <h4 class="card-header mb-1 bg-dark text-light"><strong>Gestionar movimientos</strong></h4>
+            <div class="card-body">
+                <div sec:authorize="isAuthenticated()  and hasAnyAuthority('SUPERADMINISTRADOR','ADMINISTRADOR','OPERADOR')">
+                    <a href="/movimientos/crear" class="btn btn-primary">Crear Movimiento</a>
+                </div>
+                <hr>
+                <div th:if="${msg != null}" class='alert alert-success' th:text="${msg}" role='alert'></div>
+                <table class="table table-hover-md table-responsive-sm table-bordered first">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Monto</th>
+                        <th>Concepto</th>
+                        <th scope="col">Empresa</th>
+                        <th scope="col">Empleado</th>
+                        <th class="col-1" sec:authorize="isAuthenticated()  and hasAnyAuthority('SUPERADMINISTRADOR','ADMINISTRADOR','OPERADOR')">Edit</th>
+                        <th class="col-1" sec:authorize="isAuthenticated()  and hasAnyAuthority('SUPERADMINISTRADOR','ADMINISTRADOR','OPERADOR')">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="movimientos : ${movimientos}">
+                        <th scope="row" th:text="${movimientos.id}">1</th>
+                        <td th:text="${movimientos.monto}">Monto</td>
+                        <td th:text="${movimientos.concepto}">Concepto</td>
+                        <td th:text="${movimientos.idEmpresa.id}">Id_Empresa</td>
+                        <td th:text="${movimientos.idEmpleado.id}">Id_Empleado</td>
+                        <td sec:authorize="isAuthenticated()  and hasAnyAuthority('SUPERADMINISTRADOR','ADMINISTRADOR','OPERADOR')">
+                            <a th:href="@{/movimientos/{id}/actualizar(id=${movimientos.id})}" class="btn btn-success btn-sm"
+                               role="button"
+                               title="Editar ."><i class="fas fa-pencil-alt"></i>
+                            </a>
+                        </td>
+                        <td sec:authorize="isAuthenticated()  and hasAnyAuthority('SUPERADMINISTRADOR','ADMINISTRADOR','OPERADOR')">
+                            <form th:action="@{/movimientos/{id}(id=${movimientos.id})}"  th:method="delete">
+                                <input type="hidden" name="_method" value="DELETE"/>
+                                <button id="eliminar" th:onclick="'javascript:myFunction(' + ${movimientos.id} + ')'" type="submit" class="btn btn-success btn-sm">
+                                    <i class="fas fa-trash" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/bootstrap/js/jquery.min.js}"></script>
+<script th:src="@{/bootstrap/js/popper.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/bootstrap/js/main.js}"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script th:src="@{/assets/vendor/datatables/js/dataTables.bootstrap4.min.js}"></script>
+<script th:src="@{/assets/vendor/datatables/js/data-table.js}"></script>
+</body>
+</html>

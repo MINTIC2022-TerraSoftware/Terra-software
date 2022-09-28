@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title> APP.</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/bootstrap/css/styles.css}" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<div class="wrapper d-flex align-items-stretch">
+    <!-- fragment - Menú lateral-->
+    <nav id="sidebar" th:insert="fragments/sidebar :: home-sidebar-menu"></nav>
+    <!--Contenedor-->
+    <div id="content" class="p-3 p-md-2">
+        <!-- fragment - Menú superior-->
+        <nav th:insert="fragments/menu :: menu-principal"></nav>
+        <div class="row justify-content-center">
+            <div class="card" style="width: 50rem !important;">
+                <div th:if="${editar}">
+                    <h4 class="card-header text-center bg-dark text-light">Editar empresas</h4>
+                </div>
+                <div th:unless="${editar}">
+                    <h4 class="card-header text-center bg-dark text-light">Crear empresas</h4>
+                </div>
+
+                <div class="card-body" th:with="baseUrl=(${editar}==false? '/enterprises/guardar' : '/enterprises/modificar/'+${empresa.id})">
+                    <form th:action="@{${baseUrl}}" th:object="${empresa}" method="post" id="basicform">
+                        <div th:if="${editar}">
+                            <input type="hidden" name="_method" value="PATCH" />
+                        </div>
+                         <div class="form-group">
+                            <label for="inputUserName">Nombre</label>
+                            <input id="inputUserName" type="text"  th:value="${empresa != null} ? ${empresa.nombre}" name="nombre" required="" placeholder="Ingrese nombre"
+                                   autocomplete="on" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDireccion">Dirección</label>
+                            <input id="inputDireccion" type="text" th:value="${empresa != null} ? ${empresa.direccion}" name="direccion" required="" placeholder="Ingrese dirección"
+                                   autocomplete="on" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputTelefono">Teléfono</label>
+                            <input id="inputTelefono" name="telefono" type="number"  th:value="${empresa != null} ? ${empresa.nit}" placeholder="Ingrese teléfono"
+                                   required="" autocomplete="on" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputNit">Nit</label>
+                            <input id="inputNit" name="nit" type="number" th:value="${empresa != null} ? ${empresa.nit}" required="true" placeholder="Ingrese Nit"
+                                   autocomplete="on" class="form-control">
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 pl-0">
+                                <p class="text-right">
+                                    <button type="submit" class="btn btn-space btn-primary">Submit</button>
+                                    <button class="btn btn-space btn-secondary">Cancel</button>
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
+    </div>
+</div>
+<!--Cierra Contenedor-->
+</div>
+
+<script th:src="@{/bootstrap/js/jquery.min.js}"></script>
+<script th:src="@{/bootstrap/js/popper.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/bootstrap/js/main.js}"></script>
+<script th:src="@{/tinymce/tinymce.min.js}"></script>
+</body>
+
+
+</html>

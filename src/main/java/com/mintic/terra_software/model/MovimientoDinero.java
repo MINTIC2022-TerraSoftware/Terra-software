@@ -1,22 +1,48 @@
 package com.mintic.terra_software.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.Data;
+
+import javax.persistence.*;
+
+@Entity
+@Data
+@Table(name = "movimientos")
 public class MovimientoDinero {
-    private float Monto;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public long id;
+    private double monto;
     private String concepto;
-    private String Usuario;
 
-    public MovimientoDinero(float monto, String concepto, String usuario) {
-        Monto = monto;
-        this.concepto = concepto;
-        Usuario = usuario;
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "idEmpresa")
+    private Empresa idEmpresa;
+
+    @JsonBackReference(value = "empleado-movimientoDinero")
+    @ManyToOne
+    @JoinColumn(name="idEmpleado")
+    private Empleado idEmpleado;
+
+    public MovimientoDinero() {
     }
 
-    public float getMonto() {
-        return Monto;
+    public long getId() {
+        return id;
     }
 
-    public void setMonto(float monto) {
-        Monto = monto;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public double getMonto() {
+        return monto;
+    }
+
+    public void setMonto(double monto) {
+        this.monto = monto;
     }
 
     public String getConcepto() {
@@ -27,11 +53,28 @@ public class MovimientoDinero {
         this.concepto = concepto;
     }
 
-    public String getUsuario() {
-        return Usuario;
+    public Empresa getIdEmpresa() {
+        return idEmpresa;
     }
 
-    public void setUsuario(String usuario) {
-        Usuario = usuario;
+    public void setIdEmpresa(Empresa idEmpresa) {
+        this.idEmpresa = idEmpresa;
     }
+
+    public Empleado getIdEmpleado() {
+        return idEmpleado;
+    }
+
+    public void setIdEmpleado(Empleado idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
+
+    public MovimientoDinero(double monto, String concepto, Empresa idEmpresa, Empleado idEmpleado)
+    {
+        this.monto = monto;
+        this.concepto = concepto;
+        this.idEmpresa = idEmpresa;
+        this.idEmpleado = idEmpleado;
+    }
+
 }

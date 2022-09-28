@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title> APP.</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/bootstrap/css/styles.css}" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet" >
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+</head>
+
+<body>
+
+<div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar" th:insert="fragments/sidebar :: home-sidebar-menu"></nav>
+    <div id="content" class="p-3 p-md-2">
+        <nav th:insert="fragments/menu :: menu-principal"></nav>
+        <div class="card mt-1">
+            <h4 class="card-header mb-1 bg-dark text-light"><strong>Gestionar empresas</strong></h4>
+            <div class="card-body">
+                <!-- contenido aca-->
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/bootstrap/js/jquery.min.js}"></script>
+<script th:src="@{/bootstrap/js/popper.js}"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/bootstrap/js/main.js}"></script>
+</body>
+
+<footer th:insert="fragments/footer :: pie-pagina" class="footer"></footer>
+
+</html>
